@@ -5,6 +5,8 @@ interface AppStore {
     increase: () => void
     decrease: () => void
     reset: () => void
+    username: string
+    setUsername: (username: string) => void
 }
 
 const useAppStore = create<AppStore>((set) => ({
@@ -17,6 +19,15 @@ const useAppStore = create<AppStore>((set) => ({
     },
     reset: () => {
         set(() => ({ count: 0 }))
+    },
+
+
+    username: "Default",
+    setUsername: (username: string) => {
+        set({ username: "Default" })
+        if (username !== "") {
+            set({ username })
+        }
     }
 }))
 
