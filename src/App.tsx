@@ -1,5 +1,6 @@
 import './App.css'
 import Count from './count/count'
+import UserGithub from './user/github'
 import Username from './user/username'
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
       <Count />
       <hr />
       <Username />
+      <br /><br /><br />
+      <UserGithub />
     </>
   )
 }

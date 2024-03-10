@@ -1,5 +1,14 @@
 import { create } from "zustand"
 
+interface User {
+    id: string,
+    name: string
+    followers: number
+    following: number
+    avatar_url: string
+    public_repos: string
+    html_url: string
+}
 interface AppStore {
     count: number
     increase: () => void
@@ -7,6 +16,8 @@ interface AppStore {
     reset: () => void
     username: string
     setUsername: (username: string) => void
+    user: User | undefined
+    getProfile: (name: string) => void
 }
 
 const useAppStore = create<AppStore>((set) => ({
@@ -28,6 +39,13 @@ const useAppStore = create<AppStore>((set) => ({
         if (username !== "") {
             set({ username })
         }
+    },
+
+    user: undefined,
+    getProfile: async (name: string) => {
+        const resp = await fetch(`https://api.github.com/users/${name}`)
+        const data = await resp.json()
+        set(() => ({ user: data }))
     }
 }))
 

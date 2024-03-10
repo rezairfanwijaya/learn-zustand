@@ -10,7 +10,6 @@ export default function Count(): JSX.Element {
     // example: {name:"john"} === {name:"john"} = false (default js behaviour)
     // with shallow ["a"] === ["a"] = true
     const { count, increase, decrease, reset } = useAppStore(useShallow((state) => ({ count: state.count, increase: state.increase, decrease: state.decrease, reset: state.reset })))
-    console.log("render count")
 
     return (
         <>

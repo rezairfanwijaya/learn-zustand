@@ -10,7 +10,6 @@ export default function Username(): JSX.Element {
     // example: {name:"john"} === {name:"john"} = false (default js behaviour)
     // with shallow ["a"] === ["a"] = true
     const { username, setUsername } = useAppStore(useShallow((state) => ({ username: state.username, setUsername: state.setUsername })))
-    console.log("render username")
 
     function handleUpdateUsername(e: any): void {
         setUsername(e.target.value)
