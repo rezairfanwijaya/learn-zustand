@@ -26,18 +26,21 @@ export default function UserGithub(): JSX.Element {
             return (<span>{errorField}</span>)
         }
 
-        return (
-            <div>
-                <a href={user?.html_url} target="__blank">{user?.name}</a>
+        if (user) {
+            return (
                 <div>
-                    <p>Public Repos: {user?.public_repos}</p>
-                    <p>Following: {user?.following}  </p>
-                    <p>Followers: {user?.followers}</p>
+                    <a href={user.html_url} target="__blank">{user?.name}</a>
+                    <div>
+                        <p>Public Repos: {user.public_repos}</p>
+                        <p>Following: {user.following}  </p>
+                        <p>Followers: {user.followers}</p>
+                    </div>
+                    <img src={user.avatar_url} alt="profile" width={120} height={120} />
                 </div>
-                <img src={user?.avatar_url} alt="profile" width={120} height={120} />
-            </div>
-        )
+            )
+        }
 
+        return (<></>)
     }
     return (
         <>
