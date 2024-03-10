@@ -9,7 +9,7 @@ export default function Count(): JSX.Element {
     // example: ["a"] === ["a"] = false (default js behaviour)
     // example: {name:"john"} === {name:"john"} = false (default js behaviour)
     // with shallow ["a"] === ["a"] = true
-    const { count, increase, decrease, reset } = useAppStore(useShallow((state) => ({ count: state.count, increase: state.increase, decrease: state.decrease, reset: state.reset })))
+    const { count, increase, decrease, resetCount } = useAppStore(useShallow((state) => ({ count: state.count, increase: state.increase, decrease: state.decrease, resetCount: state.resetCount })))
 
     return (
         <>
@@ -19,7 +19,7 @@ export default function Count(): JSX.Element {
                 <button type='button' onClick={increase} >+</button>
             </div>
             <br />
-            <button type='button' onClick={reset}>Reset</button>
+            <button type='button' onClick={resetCount}>Reset</button>
         </>
     )
 }

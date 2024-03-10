@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
 interface User {
     id: string,
@@ -13,14 +14,16 @@ interface AppStore {
     count: number
     increase: () => void
     decrease: () => void
-    reset: () => void
+    resetCount: () => void
     username: string
     setUsername: (username: string) => void
     user: User | undefined
     getProfile: (name: string) => void
+    reset: () => void
 }
 
-const useAppStore = create<AppStore>((set) => ({
+// persist can save the last state when the browser is reloading
+const useAppStore = create<AppStore>()(persist((set) => ({
     count: 0,
     increase: () => {
         set((state) => ({ count: state.count + 1 }))
@@ -28,10 +31,9 @@ const useAppStore = create<AppStore>((set) => ({
     decrease: () => {
         set((state) => ({ count: state.count - 1 }))
     },
-    reset: () => {
+    resetCount: () => {
         set(() => ({ count: 0 }))
     },
-
 
     username: "Default",
     setUsername: (username: string) => {
@@ -46,7 +48,11 @@ const useAppStore = create<AppStore>((set) => ({
         const resp = await fetch(`https://api.github.com/users/${name}`)
         const data = await resp.json()
         set(() => ({ user: data }))
+    },
+
+    reset: () => {
+        set(() => ({ count: 0, username: "Deafult", user: undefined }))
     }
-}))
+}), { name: "app-store" }))
 
 export default useAppStore
